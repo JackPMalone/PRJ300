@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3706828446008532251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3970616321383100551}
+  m_Layer: 0
+  m_Name: Clubs_Jack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3970616321383100551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3706828446008532251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3780133822150482916}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5040003720299541103
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3970616321383100551}
+    m_Modifications:
+    - target: {fileID: 1080052842612546125, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_Name
+      value: Clovers_Jack_black
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+--- !u!4 &3780133822150482916 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8179674921591499147, guid: 79f93f53c37a8c9419b8339807d18f5b, type: 3}
+  m_PrefabInstance: {fileID: 5040003720299541103}
+  m_PrefabAsset: {fileID: 0}

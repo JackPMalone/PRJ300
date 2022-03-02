@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3008910648485182055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763231248732331843}
+  m_Layer: 0
+  m_Name: Clubs_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1763231248732331843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3008910648485182055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8291593671707989290}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8102650830967699209
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1763231248732331843}
+    m_Modifications:
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8598171648244571618, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+      propertyPath: m_Name
+      value: Clovers_4_black
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+--- !u!4 &8291593671707989290 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 244265870179852835, guid: e69d7ea739db10f4b8ebe5a8128fdd20, type: 3}
+  m_PrefabInstance: {fileID: 8102650830967699209}
+  m_PrefabAsset: {fileID: 0}
