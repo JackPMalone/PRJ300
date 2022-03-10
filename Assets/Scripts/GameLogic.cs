@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
     [SerializeField] TMP_Text playerScoreText;
+    [SerializeField] TMP_Text dealerScoreText;
+    [SerializeField] TMP_Text endSplash;
 
     int playerCount = 1, playerScore = 0, dealerCount = 1, dealerScore = 0;
 
@@ -21,6 +24,8 @@ public class GameLogic : MonoBehaviour
     [SerializeField] List<Cards> dealerHand = new List<Cards>();
 
     bool doneBefore = false;
+
+    string playerWin = "Congrats!!!\nYou won\n\nDo you want to play again?", dealerWin = "Darn\nSo close\n\nDo you want to try again?";
 
     private void Start()
     {
@@ -52,16 +57,24 @@ public class GameLogic : MonoBehaviour
         {
             Stand();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerWin();
+        }
     }
 
-    private void Stand()
+    public void Stand()
     {
         DealerScore();
     }
 
-    private void DealerScore()
+    private bool DealerScore()
     {
+        if (dealerScore >= 17) return true;
+        
+        DealerHit();
 
+        return false; 
     }
 
     private void SetDealerHand(int i)
@@ -76,10 +89,11 @@ public class GameLogic : MonoBehaviour
 
     public void PlayerHit()
     {
-        if (playerCount >= 4) return;
+        StartCoroutine("DealerWin");
+        //if (playerCount >= 4) return;
 
-        playerCount++;
-        InstantiateCards(playerCount, true);
+        //playerCount++;
+        //InstantiateCards(playerCount, true);
     }
 
     private void DealerHit()
@@ -95,10 +109,15 @@ public class GameLogic : MonoBehaviour
         if (player)
         {
             Instantiate(playerHand[i].face, new Vector2(columns[i], playerY), Quaternion.identity);
-            Score(playerHand[i]);
+            playerScore += Score(playerHand[i]);
+            playerScoreText.text = string.Format($"Player: {playerScore}");
         }
         else
+        {
             Instantiate(dealerHand[i].face, new Vector2(columns[i], dealerY), Quaternion.identity);
+            dealerScore += Score(dealerHand[i]);
+            dealerScoreText.text = string.Format($"Dealer: {dealerScore}");
+        }
     }
 
     private int Score(Cards card)
@@ -127,8 +146,6 @@ public class GameLogic : MonoBehaviour
             default:
                 return 0;
         }
-
-        //playerScoreText.text = string.Format($"Score: {playerScore}");
     }
 
     private int AceStuff()
@@ -140,5 +157,30 @@ public class GameLogic : MonoBehaviour
         }
         else
             return 1;
+    }
+
+    public IEnumerator PlayerWin()
+    {
+        foreach (char c in playerWin)
+        {
+            endSplash.text += c;
+            yield return new WaitForSeconds(0.125f);
+        }
+    }
+
+    private IEnumerator DealerWin()
+    {
+        endSplash.color = Color.red;
+
+        foreach (char c in dealerWin)
+        {
+            endSplash.text += c;
+            yield return new WaitForSeconds(0.125f);
+        }
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(0);
     }
 }
