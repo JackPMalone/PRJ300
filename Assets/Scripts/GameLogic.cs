@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameLogic : MonoBehaviour
 {
-    int playerCount = 1, dealerCount = 1;
+    [SerializeField] TMP_Text playerScoreText;
+
+    int playerCount = 1, playerScore = 0, dealerCount = 1, dealerScore = 0;
 
     //Specific Y values for the player and dealer
     float playerY = -3.32f, dealerY = 3.1f;
@@ -17,16 +20,14 @@ public class GameLogic : MonoBehaviour
     [SerializeField] List<Cards> playerHand = new List<Cards>();
     [SerializeField] List<Cards> dealerHand = new List<Cards>();
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Hit();
-        }
-    }
+    bool doneBefore = false;
 
     private void Start()
     {
+        doneBefore = false;
+
+        playerScore = 0;
+
         for (int i = 0; i < 5; i++)
         {
             SetPlayerHand(Mathf.RoundToInt(Random.Range(0, 52)));
@@ -41,17 +42,39 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-    private void SetDealerHand(int i)
+    private void Update()
     {
-        playerHand.Add(cards[i]);
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayerHit();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Stand();
+        }
     }
 
-    private void SetPlayerHand(int i)
+    private void Stand()
+    {
+        DealerScore();
+    }
+
+    private void DealerScore()
+    {
+
+    }
+
+    private void SetDealerHand(int i)
     {
         dealerHand.Add(cards[i]);
     }
 
-    public void Hit()
+    private void SetPlayerHand(int i)
+    {
+        playerHand.Add(cards[i]);
+    }
+
+    public void PlayerHit()
     {
         if (playerCount >= 4) return;
 
@@ -69,8 +92,53 @@ public class GameLogic : MonoBehaviour
 
     private void InstantiateCards(int i, bool player)
     {
-        if (player) Instantiate(playerHand[i].face, new Vector2(columns[i], playerY), Quaternion.identity);
-        
-        else Instantiate(dealerHand[i].face, new Vector2(columns[i], dealerY), Quaternion.identity);
+        if (player)
+        {
+            Instantiate(playerHand[i].face, new Vector2(columns[i], playerY), Quaternion.identity);
+            Score(playerHand[i]);
+        }
+        else
+            Instantiate(dealerHand[i].face, new Vector2(columns[i], dealerY), Quaternion.identity);
+    }
+
+    private int Score(Cards card)
+    {
+        switch (card.value)
+        {
+            case Values.Ace:
+                return AceStuff();
+
+            case Values.Two:
+            case Values.Three:
+            case Values.Four:
+            case Values.Five:
+            case Values.Six:
+            case Values.Seven:
+            case Values.Eight:
+            case Values.Nine:
+                return ((int)card.value + 1);
+
+            case Values.Ten:
+            case Values.Jack:
+            case Values.Queen:
+            case Values.King:
+                return 10;
+
+            default:
+                return 0;
+        }
+
+        //playerScoreText.text = string.Format($"Score: {playerScore}");
+    }
+
+    private int AceStuff()
+    {
+        if ((playerScore + 11) < 21 && doneBefore == false)
+        {
+            doneBefore = true;
+            return 11;
+        }
+        else
+            return 1;
     }
 }
