@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
     [SerializeField] TMP_Text playerScoreText;
     [SerializeField] TMP_Text dealerScoreText;
     [SerializeField] TMP_Text endSplash;
+
+    [SerializeField] Button resetButton;
 
     int playerCount = 1, playerScore = 0, dealerCount = 1, dealerScore = 0;
 
@@ -49,6 +52,12 @@ public class GameLogic : MonoBehaviour
 
     private void Update()
     {
+        if (playerScore >= 21)
+        {
+            Stand();
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             PlayerHit();
@@ -57,29 +66,6 @@ public class GameLogic : MonoBehaviour
         {
             Stand();
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            PlayerWin();
-        }
-    }
-
-    public void Stand()
-    {
-        DealerScore();
-    }
-
-    private bool DealerScore()
-    {
-        if (dealerScore >= 17) return true;
-        
-        DealerHit();
-
-        return false; 
-    }
-
-    private void SetDealerHand(int i)
-    {
-        dealerHand.Add(cards[i]);
     }
 
     private void SetPlayerHand(int i)
@@ -87,13 +73,32 @@ public class GameLogic : MonoBehaviour
         playerHand.Add(cards[i]);
     }
 
+    private void SetDealerHand(int i)
+    {
+        dealerHand.Add(cards[i]);
+    }
+
+    public void Stand()
+    {
+        while (dealerScore < 17)
+        {
+            DealerHit();
+        }
+
+        if (dealerScore < playerScore)
+            StartCoroutine("PlayerWin");
+        else
+            StartCoroutine("DealerWin");
+
+        resetButton.gameObject.SetActive(true);
+    }
+
     public void PlayerHit()
     {
-        StartCoroutine("DealerWin");
-        //if (playerCount >= 4) return;
+        if (playerCount >= 4) return;
 
-        //playerCount++;
-        //InstantiateCards(playerCount, true);
+        playerCount++;
+        InstantiateCards(playerCount, true);
     }
 
     private void DealerHit()

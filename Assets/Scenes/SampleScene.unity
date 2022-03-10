@@ -409,7 +409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &210965976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -826,6 +826,7 @@ MonoBehaviour:
   playerScoreText: {fileID: 82705932}
   dealerScoreText: {fileID: 1730377146}
   endSplash: {fileID: 883712219}
+  resetButton: {fileID: 210965977}
   cards:
   - face: {fileID: 1513125660333180492, guid: 82921c6bcc6ff9b4abec870f2cb19d1f, type: 3}
     suit: 0
