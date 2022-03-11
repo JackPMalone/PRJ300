@@ -11,9 +11,17 @@ public class GameLogic : MonoBehaviour
     [SerializeField] TMP_Text dealerScoreText;
     [SerializeField] TMP_Text endSplash;
 
-    [SerializeField] Button resetButton;
+    [SerializeField] Rigidbody2D rick;
 
-    int playerCount = 1, playerScore = 0, dealerCount = 1, dealerScore = 0;
+    [SerializeField] Button resetButton;
+    [SerializeField] Button hitButton;
+    [SerializeField] Button standButton;
+
+    public int playerCount = 1;
+    public int something = 0;
+    int playerScore = 0, dealerCount = 1, dealerScore = 0, instantiated = 0;
+
+    public float speed = 1;
 
     //Specific Y values for the player and dealer
     float playerY = -3.32f, dealerY = 3.1f;
@@ -26,9 +34,31 @@ public class GameLogic : MonoBehaviour
     [SerializeField] List<Cards> playerHand = new List<Cards>();
     [SerializeField] List<Cards> dealerHand = new List<Cards>();
 
-    bool doneBefore = false;
+    public bool doneBefore = false;
 
-    string playerWin = "Congrats!!!\nYou won\n\nDo you want to play again?", dealerWin = "Darn\nSo close\n\nDo you want to try again?";
+    string yes = "Never gonna give you up\nNever gonna let you down\nNever gonna run around and desert you\nNever gonna make you cry\nNever gonna say goodbye\nNever gonna tell a lie and hurt you", playerWin = "Congrats!!!\nYou won\n\nDo you want to play again?", dealerWin = "Darn\nSo close\n\nDo you want to try again?";
+
+    bool dumbStuffAhead = false;
+
+    private void Update()
+    {
+        Logic();
+
+        if (Input.GetKeyDown(KeyCode.R))
+            Reset();
+        if (Input.GetKeyDown(KeyCode.S))
+            StartCoroutine(Ending(Color.green, playerWin));
+        if (Input.GetKeyDown(KeyCode.P))
+            StartCoroutine(Ending(Color.red, dealerWin));
+        if (Input.GetKey(KeyCode.J) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.M) && Input.GetKey(KeyCode.I) && Input.GetKey(KeyCode.E) && !dumbStuffAhead)
+        {
+            dumbStuffAhead = true;
+            rick.AddForce(new Vector3(speed * -1, 0f, 0));
+        }
+
+        //if (rick.position.x < -88)
+        //    rick.AddForce(new Vector2(-rick.velocity.x, 0));
+    }
 
     private void Start()
     {
@@ -50,24 +80,6 @@ public class GameLogic : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (playerScore >= 21)
-        {
-            Stand();
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            PlayerHit();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Stand();
-        }
-    }
-
     private void SetPlayerHand(int i)
     {
         playerHand.Add(cards[i]);
@@ -80,25 +92,34 @@ public class GameLogic : MonoBehaviour
 
     public void Stand()
     {
-        while (dealerScore < 17)
+        hitButton.gameObject.SetActive(false);
+        standButton.gameObject.SetActive(false);
+
+        while (dealerScore < 17 && dealerCount <= 4)
         {
             DealerHit();
         }
 
-        if (dealerScore < playerScore)
-            StartCoroutine("PlayerWin");
-        else
-            StartCoroutine("DealerWin");
+        Logic();
 
         resetButton.gameObject.SetActive(true);
     }
 
     public void PlayerHit()
     {
-        if (playerCount >= 4) return;
+        if (something >= 4)
+        {
+            Stand();
+            return;
+        }
+
+        something++;
 
         playerCount++;
         InstantiateCards(playerCount, true);
+
+        if (playerScore > 21 && doneBefore)
+            playerScore -= 11;
     }
 
     private void DealerHit()
@@ -116,6 +137,7 @@ public class GameLogic : MonoBehaviour
             Instantiate(playerHand[i].face, new Vector2(columns[i], playerY), Quaternion.identity);
             playerScore += Score(playerHand[i]);
             playerScoreText.text = string.Format($"Player: {playerScore}");
+            instantiated++;
         }
         else
         {
@@ -123,6 +145,12 @@ public class GameLogic : MonoBehaviour
             dealerScore += Score(dealerHand[i]);
             dealerScoreText.text = string.Format($"Dealer: {dealerScore}");
         }
+    }
+
+    private void Logic()
+    {
+        if (instantiated == 2 && playerScore == 21)
+            Ending(Color.green, "BLACKJACK!!!\nYou Won!!!\n\nDo you want to play again?");
     }
 
     private int Score(Cards card)
@@ -140,7 +168,7 @@ public class GameLogic : MonoBehaviour
             case Values.Seven:
             case Values.Eight:
             case Values.Nine:
-                return ((int)card.value + 1);
+                return (int)card.value + 1;
 
             case Values.Ten:
             case Values.Jack:
@@ -164,20 +192,11 @@ public class GameLogic : MonoBehaviour
             return 1;
     }
 
-    public IEnumerator PlayerWin()
+    public IEnumerator Ending(Color color, string text)
     {
-        foreach (char c in playerWin)
-        {
-            endSplash.text += c;
-            yield return new WaitForSeconds(0.125f);
-        }
-    }
+        endSplash.color = color;
 
-    private IEnumerator DealerWin()
-    {
-        endSplash.color = Color.red;
-
-        foreach (char c in dealerWin)
+        foreach (char c in text)
         {
             endSplash.text += c;
             yield return new WaitForSeconds(0.125f);
