@@ -18,7 +18,7 @@ public class GameLogic : MonoBehaviour
     [SerializeField] Button standButton;
 
     public int playerCount = 1;
-    public int something = 0;
+    public int something = 2;
     int playerScore = 0, dealerCount = 1, dealerScore = 0, instantiated = 0;
 
     public float speed = 1;
@@ -64,6 +64,7 @@ public class GameLogic : MonoBehaviour
     {
         doneBefore = false;
 
+        something = 2;
         playerScore = 0;
 
         for (int i = 0; i < 5; i++)
@@ -107,11 +108,9 @@ public class GameLogic : MonoBehaviour
 
     public void PlayerHit()
     {
-        if (something >= 4)
-        {
-            Stand();
-            return;
-        }
+        Debug.Log($"Something = {something}");
+
+        
 
         something++;
 
@@ -120,6 +119,21 @@ public class GameLogic : MonoBehaviour
 
         if (playerScore > 21 && doneBefore)
             playerScore -= 11;
+
+        playerScoreText.text = string.Format($"Player: {playerScore}");
+
+        //if (playerScore > 21 || playerScore == 21)
+        //    Stand();
+
+        if (something == 5)
+        {
+            Stand();
+            return;
+        }
+
+
+        Debug.Log(playerScore);
+        Debug.Log(something);
     }
 
     private void DealerHit()
