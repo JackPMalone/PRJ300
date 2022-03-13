@@ -122,8 +122,8 @@ public class GameLogic : MonoBehaviour
 
         playerScoreText.text = string.Format($"Player: {playerScore}");
 
-        //if (playerScore > 21 || playerScore == 21)
-        //    Stand();
+        if (playerScore > 21 || playerScore == 21)
+            Stand();
 
         if (something == 5)
         {
